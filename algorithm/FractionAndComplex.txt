@@ -1,0 +1,48 @@
+Fractions and Complex Numbers
+Fractional numbers can be seen in many problems. Perhaps the most difficult aspect of dealing with fractions is finding the right way of representing them. Although it is possible to create a fractions class containing the required attributes and methods, for most purposes it is sufficient to represent fractions as 2-element arrays (pairs). The idea is that we store the numerator in the first element and the denominator in the second element. We will begin with multiplication of two fractions a and b:
+
+public int[] multiplyFractions(int[] a, int[] b)
+{
+   int[] c={a[0]*b[0], a[1]*b[1]};
+   return c;
+}
+Adding fractions is slightly more complicated, since only fractions with the same denominator can be added together. First of all we must find the common denominator of the two fractions and then use multiplication to transform the fractions such that they both have the common denominator as their denominator. The common denominator is a number which can divide both denominators and is simply the LCM (defined earlier) of the two denominators. For example lets add 4/9 and 1/6. LCM of 9 and 6 is 18. Thus to transform the first fraction we need to multiply it by 2/2 and multiply the second one by 3/3:
+
+4/9 + 1/6 = (4*2)/(9 * 2) + (1 * 3)/(6 * 3) =  8/18 +  3/18
+Once both fractions have the same denominator, we simply add the numerators to get the final answer of 11/18. Subtraction is very similar, except we subtract at the last step:
+
+4/9 - 1/6 =  8/18 -  3/18 =  5/18
+Here is the code to add two fractions:
+
+public int[] addFractions(int[] a, int[] b)
+{
+   int denom=LCM(a[1],b[1]);
+   int[] c={denom/a[1]*a[0] + denom/b[1]*b[0], denom};
+   return c;
+}
+Finally it is useful to know how to reduce a fraction to its simplest form. The simplest form of a fraction occurs when the GCD of the numerator and denominator is equal to 1. We do this like so:
+
+public void reduceFraction(int[] a)
+{
+   int b=GCD(a[0],a[1]);
+   a[0]/=b;
+   a[1]/=b;
+}
+Using a similar approach we can represent other special numbers, such as complex numbers. In general, a complex number is a number of the form a + ib, where a and b are reals and i is the square root of -1. For example, to add two complex numbers m = a + ib and n = c + id we simply group likewise terms:
+
+m + n
+= (a + ib) + (c + id)
+= (a + c) + i(b + d)
+Multiplying two complex numbers is the same as multiplying two real numbers, except we must use the fact that i^2 = -1:
+
+m * n
+= (a + ib) * (c + id)
+= ac + iad + ibc + (i^2)bd
+= (ac - bd) + i(ad + bc)
+By storing the real part in the first element and the complex part in the second element of the 2-element array we can write code that performs the above multiplication:
+
+public int[] multiplyComplex(int[] m, int[] n)
+{
+   int[] prod = {m[0]*n[0] - m[1]*n[1], m[0]*n[1] + m[1]*n[0]};
+   return prod;
+}

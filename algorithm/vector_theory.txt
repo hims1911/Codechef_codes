@@ -1,0 +1,194 @@
+http://www.studytonight.com/cpp/stl/stl-container-vector
+
+
+
+VECTOR
+An array works fine when we have to implement sequential data structures like arrays, except it is static, i.e. we have to define its maximum size during its initialization and it cannot contain elements greater than its maximum size. Now suppose, if during the program execution we have to store elements more than its size, or if we are reading input stream of elements and we do not know the upper bound of the number of elements, there are high chances of occurrence of index_out_bound exception or unwanted termination of the program.
+
+We can do one thing, initialize the array with maximum size allowed by the complier, i.e. 10^6 elements per array, but that is highly space consuming approach and there is a wastage of space if number of elements to be entered are way too less, thus this approach is never used in programming.
+
+Solution of the above problem is dynamic arrays! They have dynamic size, i.e. their size can change during runtime. Container library provides vectors to replicate dynamic arrays.
+
+SYNTAX for creating a vector is : vector< object_type > vector_name;
+
+For example :
+
+#include <vector>
+int main()
+{
+   std::vector<int> my_vector;
+}
+Vector being a dynamic array, doesn't needs size during declaration, hence the above code will create a blank vector. There are many ways to initialize a vector like,
+
+#include <vector>
+int main()
+{
+   std::vector<string> v {"Pankaj" , "The" , "Java" ,"Coder"};
+}
+Vector declaration and data entry
+
+
+Note that this type of initialization works only in C++ 11 and above. You can also initialize the vector based on the range of other vectors, like :
+
+#include <vector>
+int main()
+{
+   std::vector<string> v(v1.begin(), v1.end());
+}
+The above code initialize the vector by elements pointed by iterators returned by v1.begin() and v2.end(), begin() and end() are the same function we have studied with array, they work same with vectors.
+
+You can also initialize a vector with one element a certain number of times, like :
+
+#include <vector>
+int main()
+{
+   std::vector<string> v(4 , "test");
+}
+same element at all positions in vector
+
+These are me of the ways using which you can initialize your vector, but remember, initializing your vector using another vector or by using elements directly does not limit its size, its size will always be dynamic, and more elements can be inserted into the vector, whenever required.
+
+Member Functions of Vector
+push_back
+
+push_back() is used for inserting an element at the end of the vector. If the type of object passed as parameter in the push_back() is not same as that of the vector or is not interconvertible an exception is thrown.
+
+The following illustration will show how push_back() works :
+
+push_back working
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+  vector<int>  v;
+  v.push_back(1);  //insert 1 at the back of v
+  v.push_back(2);  //insert 2 at the back of v
+  v.push_back(4);  //insert 3 at the back of v
+
+  for(vector<int>::iterator i = v.begin(); i != v.end(); i++) {
+  	cout << *i <<" ";   // for printing the vector
+  }
+}
+/* Output : 1 2 4 */
+
+insert
+
+insert(itr, element) method inserts the element in vector before the position pointed by iterator itr.
+
+The following illustration will show how insert works :
+
+insert one element in vector
+
+insert function can be overloaded by third argument, count as well. This count parameter defines how many times the element is to be inserted before the pointed position.
+
+insert single element multiple times in vector
+
+This method can also be used to insert elements from any other vector in given range, specified by two iterators, defining starting and ending point of the range.
+
+v.insert(i, v2.begin(), v2.end());
+Above code will insert the elements from v2.begin() to v2.end() before index pointed by i.
+
+
+pop_back
+
+pop_back() is used to remove the last element from the vector. It reduces the size of the vector by one.
+
+Below is an example :
+
+pop_back example
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+  vector<int> v1 {10,20,30,40};
+  
+  v1.pop_back();  
+
+  vector<int>::iterator it;
+  
+  for(it = v.begin(); it != v.end(); it++) {
+      cout << *it <<" ";   // for printing the vector
+  }
+}
+/* Output : 10 20 30 */
+
+erase
+
+erase(itr_pos) removes the element pointed by the iterator itr_pos. erase method can also be overloaded with an extra iterator specifying the end point of the range to be removed, i.e erase(itr_start, itr_end).
+
+The following code will illustrate erase :
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+  vecto<int>v1 {10,20,30,40};
+  vector<int>iterator:: it = v.begin();
+  
+  v.erase(it);   //removes first element from the vector
+
+  v.erase(v1.begin(), v1.end() - 2 )  
+  /*removes all the elements except last two */
+
+  for(it = v.begin(); it != v.end(); it++) {
+      cout << *it <<" ";   // for printing the vector
+  }
+}
+
+/* Output : 30 40 */
+
+resize
+
+resize(size_type n, value_type val) method resizes the vector to n elements. If the current size of the vector is greater than n then the trailing elements are removed from the vector and if the current size is smaller than n than extra val elements are inserted at the back of the vector.
+
+For example, If the size of the vector is 4 right now, with elements {10, 20, 30, 40} and we use resize method to resize it to size 5. Then by default a fifth element with value 0 will be inserted in the vector. We can specify the data to not be zero, by explicitly mentioning it as the val while calling the resize method.
+
+
+swap
+
+This method interchanges value of two vectors.
+
+If we have two vectors v1 and v2 and we want to swap the elements inside them, you just need to call v1.swap(v2), this will swap the values of the two vectors.
+
+
+clear
+
+This method clears the whole vector, removes all the elements from the vector but do not delete the vector.
+
+SYNTAX : clear()
+
+For a vector v, v.clear() will clear it, but not delete it.
+
+
+size
+
+This method returns the size of the vector.
+
+
+empty
+
+This method returns true if the vector is empty else returns false. 
+capacity
+
+This method returns the number of elements that can be inserted in the vector based on the memory allocated to the vector.
+
+
+at
+
+This method works same in case of vector as it works for array. vector_name.at(i) returns the element at ith index in the vector vector_name.
+
+
+front and back
+
+vector_name.front() retuns the element at the front of the vector (i.e. leftmost element). While vector_name.back() returns the element at the back of the vector (i.e. rightmost element).

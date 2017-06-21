@@ -1,0 +1,266 @@
+What is Greedy Algorithm?
+
+There is no formal definition of what exactly a greedy algorithm is. So let’s consider an informal definition of what greedy algorithm usually looks like. A greedy algorithm, as the name suggests, always makes the choice that looks best at that moment. That is, it makes a locally optimal choice in the hope that this choice will lead to a globally optimal solution. Now the question is how to decide which choice is the best (or optimal), for that a function is required (which is called as objective function) that needs to be optimized (either maximized or minimized) at the given point. Greedy algorithm makes greedy choices at each step such that the objective function is optimized. The Greedy Algorithm has only one shot to compute the optimal solution as it never goes back and reverses the decision. Greedy algorithms have some advantages and disadvantages:
+
+It is quite easy to come up with a greedy algorithm (or even multiple greedy algorithms) for a problem.
+Analyzing the run time for greedy algorithms will generally be much easier than for other techniques (like Divide and Conquer). For Divide and Conquer, it is quite unclear whether they are fast or slow because at each level of recursion, on one hand the size of problem is getting smaller and on the other hand the number of subproblems is increasing.
+The difficult part is that one have to work much harder to understand correctness issues for greedy algorithms. Even with the correct algorithm it's hard to prove why it is correct. Proving that a greedy algorithm is correct is more of an art than science.
+NOTE: Most greedy algorithms are NOT correct (or rather optimal).
+
+How to come up with a Greedy Algorithm?
+
+Let’s take an example. Suppose you are suffering from a lethal disease and you have only 
+T
+T years left to live. Now you want to try all the different things you always wanted to do. You are given an array 
+A
+A of integers denoting the time taken to complete different things in years. You want to know what is the maximum number of different things you can do in the limited time you have.
+
+This is a simple Greedy Problem. In each iteration, one needs to greedily select the things which will take minimum time to complete and also maintain two variables 
+c
+u
+r
+r
+e
+n
+t
+T
+i
+m
+e
+currentTime and 
+n
+u
+m
+b
+e
+r
+O
+f
+T
+h
+i
+n
+g
+s
+numberOfThings. So, simply sort the array 
+A
+A in nondecreasing order. Then, select the things one by one and add the time taken to complete that thing into 
+c
+u
+r
+r
+e
+n
+t
+T
+i
+m
+e
+currentTime and also add one to 
+n
+u
+m
+b
+e
+r
+O
+f
+T
+h
+i
+n
+g
+s
+numberOfThings. Repeat as long as the 
+c
+u
+r
+r
+e
+n
+t
+T
+i
+m
+e
+currentTime is smaller than or equal to 
+T
+T.
+
+Let 
+A
+=
+[
+5
+,
+3
+,
+4
+,
+2
+,
+1
+]
+A=[5,3,4,2,1] and 
+T
+=
+6
+T=6
+After sorting, 
+A
+=
+[
+1
+,
+2
+,
+3
+,
+4
+,
+5
+]
+A=[1,2,3,4,5]
+After 
+1
+s
+t
+1st iteration, 
+c
+u
+r
+r
+e
+n
+t
+T
+i
+m
+e
+=
+1
+currentTime=1 and 
+n
+u
+m
+b
+e
+r
+O
+f
+T
+h
+i
+n
+g
+s
+=
+1
+numberOfThings=1
+After 
+2
+n
+d
+2nd iteration, 
+c
+u
+r
+r
+e
+n
+t
+T
+i
+m
+e
+=
+1
++
+2
+=
+3
+currentTime=1+2=3 and 
+n
+u
+m
+b
+e
+r
+O
+f
+T
+h
+i
+n
+g
+s
+=
+2
+numberOfThings=2
+After 
+3
+r
+d
+3rd iteration, 
+c
+u
+r
+r
+e
+n
+t
+T
+i
+m
+e
+=
+3
++
+3
+=
+6
+currentTime=3+3=6 and 
+n
+u
+m
+b
+e
+r
+O
+f
+T
+h
+i
+n
+g
+s
+=
+3
+numberOfThings=3
+After 
+4
+t
+h
+4th iteration, 
+c
+u
+r
+r
+e
+n
+t
+T
+i
+m
+e
+=
+6
++
+4
+=
+10
+currentTime=6+4=10 which is greater than 
+T
+T, answer will be 
+3
+3

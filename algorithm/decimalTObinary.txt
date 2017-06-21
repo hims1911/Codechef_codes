@@ -1,0 +1,24 @@
+To convert from a decimal to a binary is just as easy. Suppose we wanted to convert 43 in decimal to binary. At each step of the method we divide 43 by 2 and memorize the remainder. The final list of remainders is the required binary representation:
+
+43/2 = 21 + remainder 1
+21/2 = 10 + remainder 1
+10/2 = 5  + remainder 0
+5/2  = 2  + remainder 1
+2/2  = 1  + remainder 0
+1/2  = 0  + remainder 1
+So 43 in decimal is 101011 in binary. By swapping all occurrences of 10 with b in our previous method we create a function which converts from a decimal number n to a number in base b (2<=b<=10):
+
+public int fromDecimal(int n, int b)
+{
+   int result=0;
+   int multiplier=1;
+      
+   while(n>0)
+   {
+      result+=n%b*multiplier;
+      multiplier*=10;
+      n/=b;
+   }
+      
+   return result;
+}
